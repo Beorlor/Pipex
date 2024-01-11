@@ -6,12 +6,16 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:30:12 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 17:43:05 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:30:40 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/**
+ * Handles the exit procedure of the program.
+ * Prints a usage message if the exit code indicates a usage error.
+ */
 void	exit_handler(int n_exit)
 {
 	if (n_exit == 1)
@@ -19,6 +23,11 @@ void	exit_handler(int n_exit)
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * Opens a file with specified mode.
+ * Returns the file descriptor of the opened file.
+ * In case of an error opening the file, prints the error and exits.
+ */
 int	open_file(char *file, int in_or_out)
 {
 	int	ret;
@@ -35,19 +44,10 @@ int	open_file(char *file, int in_or_out)
 	return (ret);
 }
 
-void	ft_free_tab(char **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
+/**
+ * Retrieves the absolute path of a command from the PATH environment variable.
+ * Returns the path if found, otherwise returns the original command.
+ */
 char	*get_path(char *cmd, char **env)
 {
 	int		i;
@@ -76,6 +76,10 @@ char	*get_path(char *cmd, char **env)
 	return (cmd);
 }
 
+/**
+ * Custom implementation to get the value of an environment variable.
+ * Returns the value of the specified environment variable.
+ */
 char	*my_getenv(char *name, char **env)
 {
 	int		i;
@@ -98,4 +102,20 @@ char	*my_getenv(char *name, char **env)
 		i++;
 	}
 	return (NULL);
+}
+
+/**
+ * Frees a dynamically allocated array of strings (char**).
+ */
+void	ft_free_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }

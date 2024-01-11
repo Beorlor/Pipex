@@ -6,12 +6,17 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:29:57 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 17:41:45 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:29:12 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/**
+ * The main function that sets up a pipeline between two processes.
+ * It creates a pipe and forks the process into a parent and a child.
+ * It then calls the respective functions for each process to handle their part of the pipeline.
+ */
 int	main(int ac, char **av, char **env)
 {
 	int		p_fd[2];
@@ -35,6 +40,11 @@ int	main(int ac, char **av, char **env)
 	parent(av, p_fd, env);
 }
 
+/**
+ * Child process function.
+ * Opens the input file, redirects stdin to read from this file, and stdout to write to a pipe.
+ * It then executes a given command with this setup.
+ */
 void	child(char **av, int *p_fd, char **env)
 {
 	int		fd;
@@ -46,6 +56,11 @@ void	child(char **av, int *p_fd, char **env)
 	exec(av[2], env);
 }
 
+/**
+ * Parent process function.
+ * Opens the output file, redirects stdin to read from a pipe (output of child), and stdout to write to this file.
+ * It then executes a given command with this setup.
+ */
 void	parent(char **av, int *p_fd, char **env)
 {
 	int		fd;
@@ -57,6 +72,11 @@ void	parent(char **av, int *p_fd, char **env)
 	exec(av[3], env);
 }
 
+/**
+ * Executes a command.
+ * Splits the command into arguments, finds the path of the command, and executes it using execve.
+ * In case of an error, prints the error and exits.
+ */
 void	exec(char *cmd, char **env)
 {
 	char	**s_cmd;
