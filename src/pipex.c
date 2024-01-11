@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:29:57 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/04 03:30:02 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:21:14 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	exec(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
-		ft_free_tab(s_cmd);
-		exit(0);
+		perror("execve error");
+    	ft_free_tab(s_cmd);
+    	exit(EXIT_FAILURE);
 	}
 }
 
@@ -58,10 +57,16 @@ int	main(int ac, char **av, char **env)
 	if (ac != 5)
 		exit_handler(1);
 	if (pipe(p_fd) == -1)
-		exit(-1);
+	{
+    	perror("pipe error");
+    	exit(EXIT_FAILURE);
+	}
 	pid = fork();
 	if (pid == -1)
-		exit(-1);
+	{
+   		perror("fork error");
+   		exit(EXIT_FAILURE);
+	}
 	if (!pid)
 		child(av, p_fd, env);
 	parent(av, p_fd, env);

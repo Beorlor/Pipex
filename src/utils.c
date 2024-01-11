@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:30:12 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/04 03:34:08 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:17:51 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	exit_handler(int n_exit)
 {
 	if (n_exit == 1)
 		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
+	exit(EXIT_FAILURE);
 }
 
 int	open_file(char *file, int in_or_out)
@@ -28,7 +28,10 @@ int	open_file(char *file, int in_or_out)
 	if (in_or_out == 1)
 		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (ret == -1)
-		exit(0);
+	{
+    	perror("Error opening file");
+    	exit(EXIT_FAILURE);
+	}
 	return (ret);
 }
 
