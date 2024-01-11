@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:30:12 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 18:30:40 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 19:02:56 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,22 @@ char	*get_path(char *cmd, char **env)
 	char	*exec;
 	char	**allpath;
 	char	*path_part;
-	char	**s_cmd;
 
 	i = -1;
 	allpath = ft_split(my_getenv("PATH", env), ':');
-	s_cmd = ft_split(cmd, ' ');
 	while (allpath[++i])
 	{
 		path_part = ft_strjoin(allpath[i], "/");
-		exec = ft_strjoin(path_part, s_cmd[0]);
+		exec = ft_strjoin(path_part, cmd);
 		free(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
-			ft_free_tab(s_cmd);
+			ft_free_tab(allpath);
 			return (exec);
 		}
 		free(exec);
 	}
 	ft_free_tab(allpath);
-	ft_free_tab(s_cmd);
 	return (cmd);
 }
 
@@ -93,7 +90,7 @@ char	*my_getenv(char *name, char **env)
 		while (env[i][j] && env[i][j] != '=')
 			j++;
 		sub = ft_substr(env[i], 0, j);
-		if (ft_strncmp(sub, name, INT_MAXI) == 0) //strcmp !!!!!!!!
+		if (ft_strncmp(sub, name, strlen(name)) == 0)
 		{
 			free(sub);
 			return (env[i] + j + 1);

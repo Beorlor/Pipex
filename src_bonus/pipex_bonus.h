@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:29:20 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/04 03:29:25 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:53:54 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include<sys/types.h>
-# include<sys/stat.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
 
