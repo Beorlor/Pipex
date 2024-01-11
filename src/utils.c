@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:30:12 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 19:02:56 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 19:29:20 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*my_getenv(char *name, char **env)
 		while (env[i][j] && env[i][j] != '=')
 			j++;
 		sub = ft_substr(env[i], 0, j);
-		if (ft_strncmp(sub, name, strlen(name)) == 0)
+		if (ft_strncmp(sub, name, ft_strlen(name)) == 0)
 		{
 			free(sub);
 			return (env[i] + j + 1);
