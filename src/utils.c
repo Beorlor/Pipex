@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:30:12 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 17:17:51 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:43:05 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,6 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-char	*my_getenv(char *name, char **env)
-{
-	int		i;
-	int		j;
-	char	*sub;
-
-	i = 0;
-	while (env[i])
-	{
-		j = 0;
-		while (env[i][j] && env[i][j] != '=')
-			j++;
-		sub = ft_substr(env[i], 0, j);
-		if (ft_strncmp(sub, name, INT_MAXI) == 0) //strcmp !!!!!!!!
-		{
-			free(sub);
-			return (env[i] + j + 1);
-		}
-		free(sub);
-		i++;
-	}
-	return (NULL);
-}
-
 char	*get_path(char *cmd, char **env)
 {
 	int		i;
@@ -98,4 +74,28 @@ char	*get_path(char *cmd, char **env)
 	ft_free_tab(allpath);
 	ft_free_tab(s_cmd);
 	return (cmd);
+}
+
+char	*my_getenv(char *name, char **env)
+{
+	int		i;
+	int		j;
+	char	*sub;
+
+	i = 0;
+	while (env[i])
+	{
+		j = 0;
+		while (env[i][j] && env[i][j] != '=')
+			j++;
+		sub = ft_substr(env[i], 0, j);
+		if (ft_strncmp(sub, name, INT_MAXI) == 0) //strcmp !!!!!!!!
+		{
+			free(sub);
+			return (env[i] + j + 1);
+		}
+		free(sub);
+		i++;
+	}
+	return (NULL);
 }
