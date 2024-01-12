@@ -6,7 +6,7 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:06:01 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 15:06:04 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:06:34 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	open_file(char *file, int in_or_out)
 		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (ret == -1)
 	{
-    	perror("Error opening file");
-    	exit(EXIT_FAILURE);
+		perror("Error opening file");
+		exit(EXIT_FAILURE);
 	}
 	return (ret);
 }

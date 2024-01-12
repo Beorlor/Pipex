@@ -6,7 +6,7 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:05:32 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 15:05:35 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:08:24 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /**
  * The main function that sets up a pipeline between two processes.
  * It creates a pipe and forks the process into a parent and a child.
- * It then calls the respective functions for each process to handle their part of the pipeline.
+ * It then calls the respective functions for each process to handle
+ * their part of the pipeline.
  */
 int	main(int ac, char **av, char **env)
 {
@@ -26,14 +27,14 @@ int	main(int ac, char **av, char **env)
 		exit_handler(1);
 	if (pipe(p_fd) == -1)
 	{
-    	perror("pipe error");
-    	exit(EXIT_FAILURE);
+		perror("pipe error");
+		exit(EXIT_FAILURE);
 	}
 	pid = fork();
 	if (pid == -1)
 	{
-   		perror("fork error");
-   		exit(EXIT_FAILURE);
+		perror("fork error");
+		exit(EXIT_FAILURE);
 	}
 	if (!pid)
 		child(av, p_fd, env);
@@ -42,7 +43,8 @@ int	main(int ac, char **av, char **env)
 
 /**
  * Child process function.
- * Opens the input file, redirects stdin to read from this file, and stdout to write to a pipe.
+ * Opens the input file, redirects stdin to read from this file,
+ * and stdout to write to a pipe.
  * It then executes a given command with this setup.
  */
 void	child(char **av, int *p_fd, char **env)
@@ -58,7 +60,8 @@ void	child(char **av, int *p_fd, char **env)
 
 /**
  * Parent process function.
- * Opens the output file, redirects stdin to read from a pipe (output of child), and stdout to write to this file.
+ * Opens the output file, redirects stdin to read from a pipe (output of child),
+ * and stdout to write to this file.
  * It then executes a given command with this setup.
  */
 void	parent(char **av, int *p_fd, char **env)
@@ -74,7 +77,8 @@ void	parent(char **av, int *p_fd, char **env)
 
 /**
  * Executes a command.
- * Splits the command into arguments, finds the path of the command, and executes it using execve.
+ * Splits the command into arguments, finds the path of the command,
+ * and executes it using execve.
  * In case of an error, prints the error and exits.
  */
 void	exec(char *cmd, char **env)
@@ -87,7 +91,7 @@ void	exec(char *cmd, char **env)
 	if (execve(path, s_cmd, env) == -1)
 	{
 		perror("execve error");
-    	ft_free_tab(s_cmd);
-    	exit(EXIT_FAILURE);
+		ft_free_tab(s_cmd);
+		exit(EXIT_FAILURE);
 	}
 }
