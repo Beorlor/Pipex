@@ -6,7 +6,7 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:05:17 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 16:31:19 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:12:05 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	main(int ac, char **av, char **env)
 
 /**
  * Sets up a pipe and forks the process.
- * The child process executes a command, and the parent process sets up for the next command.
+ * The child process executes a command,
+ * and the parent process sets up for the next command.
  */
 void	do_pipe(char *cmd, char **env)
 {
@@ -101,7 +102,8 @@ void	exec(char *cmd, char **env)
 
 /**
  * Handles the 'here_doc' functionality.
- * Creates a pipe, forks the process, and reads input until the delimiter is found.
+ * Creates a pipe, forks the process,
+ * and reads input until the delimiter is found.
  */
 void	here_doc(char **av)
 {
@@ -131,7 +133,8 @@ void	here_doc(char **av)
 
 /**
  * Part of the 'here_doc' functionality.
- * This function is executed by the child process to read input and write to a pipe.
+ * This function is executed by the child process
+ * to read input and write to a pipe.
  */
 void	here_doc_put_in(char **av, int *p_fd)
 {
