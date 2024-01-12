@@ -16,7 +16,7 @@ The Pipex project is an implementation of a simple yet powerful concept used in 
 ### Installation
 1. Clone the repository:
    ```
-   git clone https://your-repository-link/pipex.git
+   git clone https://github.com/Beorlor/Pipex.git
    ```
 2. Change to the project directory:
    ```
