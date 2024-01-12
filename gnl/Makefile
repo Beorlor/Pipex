@@ -1,5 +1,3 @@
-# Makefile for get_next_line library
-
 NAME = libgnl.a
 
 CC = gcc
