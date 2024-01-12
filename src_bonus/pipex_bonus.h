@@ -6,7 +6,7 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:04:46 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 15:06:30 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:26:54 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_BONUS_H
 
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/types.h>
