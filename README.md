@@ -56,7 +56,7 @@ Enter your input text after running the command. To terminate the input, type th
 
 Equivalent shell command:
 ```
-cat << END | grep foo | wc -l > outfile
+cat << END | grep foo | wc -l >> outfile
 ```
 
 ## Acknowledgments
