@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 03:29:30 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/12 14:56:46 by beorlor          ###   ########.fr       */
+/*   Created: 2024/01/12 15:05:06 by jedurand          #+#    #+#             */
+/*   Updated: 2024/01/12 15:09:10 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,22 @@ char	*get_path(char *cmd, char **env)
 	char	*exec;
 	char	**allpath;
 	char	*path_part;
-	char	**s_cmd;
 
 	i = -1;
 	allpath = ft_split(my_getenv("PATH", env), ':');
-	s_cmd = ft_split(cmd, ' ');
 	while (allpath[++i])
 	{
 		path_part = ft_strjoin(allpath[i], "/");
-		exec = ft_strjoin(path_part, s_cmd[0]);
+		exec = ft_strjoin(path_part, cmd);
 		free(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
-			ft_free_tab(s_cmd);
+			ft_free_tab(allpath);
 			return (exec);
 		}
 		free(exec);
 	}
 	ft_free_tab(allpath);
-	ft_free_tab(s_cmd);
 	return (cmd);
 }
 
@@ -75,7 +72,7 @@ char	*my_getenv(char *name, char **env)
 		while (env[i][j] && env[i][j] != '=')
 			j++;
 		sub = ft_substr(env[i], 0, j);
-		if (ft_strcmp(sub, name) == 0)
+		if (ft_strncmp(sub, name, ft_strlen(name)) == 0)
 		{
 			free(sub);
 			return (env[i] + j + 1);

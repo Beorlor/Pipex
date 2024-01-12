@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 03:29:04 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/12 14:58:50 by beorlor          ###   ########.fr       */
+/*   Created: 2024/01/12 15:05:17 by jedurand          #+#    #+#             */
+/*   Updated: 2024/01/12 15:06:59 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av, char **env)
 
 	if (ac < 5)
 		exit_handler(1);
-	if (ft_strcmp(av[1], "here_doc") == 0)
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) == 0)
 	{
 		if (ac < 6)
 			exit_handler(1);

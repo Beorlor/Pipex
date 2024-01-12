@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 03:30:06 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 18:53:58 by beorlor          ###   ########.fr       */
+/*   Created: 2024/01/12 15:05:41 by jedurand          #+#    #+#             */
+/*   Updated: 2024/01/12 15:05:44 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h>  
+# include <fcntl.h>
 # include <stdlib.h>
 
 void exec(char *cmd, char **env);
