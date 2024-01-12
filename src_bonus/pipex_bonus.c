@@ -6,12 +6,17 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:05:17 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 15:06:59 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:31:19 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
+/**
+ * Main function of the pipex program.
+ * It sets up the environment for the pipe and executes the commands provided.
+ * Supports 'here_doc' functionality for additional input handling.
+ */
 int	main(int ac, char **av, char **env)
 {
 	int		i;
@@ -41,16 +46,26 @@ int	main(int ac, char **av, char **env)
 	exec(av[ac - 2], env);
 }
 
+/**
+ * Sets up a pipe and forks the process.
+ * The child process executes a command, and the parent process sets up for the next command.
+ */
 void	do_pipe(char *cmd, char **env)
 {
 	pid_t	pid;
 	int		p_fd[2];
 
 	if (pipe(p_fd) == -1)
-		exit(0);
+	{
+		perror("pipe error");
+		exit(EXIT_FAILURE);
+	}
 	pid = fork();
 	if (pid == -1)
-		exit(0);
+	{
+		perror("fork error");
+		exit(EXIT_FAILURE);
+	}
 	if (!pid)
 	{
 		close(p_fd[0]);
@@ -64,6 +79,11 @@ void	do_pipe(char *cmd, char **env)
 	}
 }
 
+/**
+ * Executes a command using execve.
+ * It splits the command into arguments, finds the path, and then executes it.
+ * Prints an error message and exits if the command is not found.
+ */
 void	exec(char *cmd, char **env)
 {
 	char	**s_cmd;
@@ -73,23 +93,32 @@ void	exec(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
+		perror("execve error");
 		ft_free_tab(s_cmd);
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 }
 
+/**
+ * Handles the 'here_doc' functionality.
+ * Creates a pipe, forks the process, and reads input until the delimiter is found.
+ */
 void	here_doc(char **av)
 {
 	int		p_fd[2];
 	pid_t	pid;
 
 	if (pipe(p_fd) == -1)
-		exit(0);
+	{
+		perror("pipe error");
+		exit(EXIT_FAILURE);
+	}
 	pid = fork();
 	if (pid == -1)
-		exit(0);
+	{
+		perror("fork error");
+		exit(EXIT_FAILURE);
+	}
 	if (!pid)
 		here_doc_put_in(av, p_fd);
 	else
@@ -100,6 +129,10 @@ void	here_doc(char **av)
 	}
 }
 
+/**
+ * Part of the 'here_doc' functionality.
+ * This function is executed by the child process to read input and write to a pipe.
+ */
 void	here_doc_put_in(char **av, int *p_fd)
 {
 	char	*ret;
@@ -111,7 +144,7 @@ void	here_doc_put_in(char **av, int *p_fd)
 		if (ft_strncmp(ret, av[2], ft_strlen(av[2])) == 0)
 		{
 			free(ret);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(ret, p_fd[1]);
 		free(ret);

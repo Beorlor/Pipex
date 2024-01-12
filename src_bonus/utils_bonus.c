@@ -6,34 +6,50 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:05:06 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 15:09:10 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:25:37 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
+/**
+ * Handles the exit procedure of the program.
+ * Prints a usage message if the exit code indicates a usage error.
+ */
 void	exit_handler(int n_exit)
 {
 	if (n_exit == 1)
-		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
+		ft_putstr_fd("Usage: ./pipex infile cmd cmd outfile\n", 2);
+	exit(EXIT_FAILURE);
 }
 
+/**
+ * Opens a file based on the specified mode (read, write, or append).
+ * Returns the file descriptor of the opened file.
+ * Exits the program using perror to display an error message in case of failure.
+ */
 int	open_file(char *file, int in_or_out)
 {
 	int	ret;
 
 	if (in_or_out == 0)
-		ret = open(file, O_RDONLY, 0777);
-	if (in_or_out == 1)
+		ret = open(file, O_RDONLY);
+	else if (in_or_out == 1)
 		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (in_or_out == 2)
+	else if (in_or_out == 2)
 		ret = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (ret == -1)
-		exit(0);
+	{
+		perror("Error opening file");
+		exit(EXIT_FAILURE);
+	}
 	return (ret);
 }
 
+/**
+ * Retrieves the absolute path of a command from the PATH environment variable.
+ * Returns the path if found, otherwise returns the original command.
+ */
 char	*get_path(char *cmd, char **env)
 {
 	int		i;
@@ -59,6 +75,10 @@ char	*get_path(char *cmd, char **env)
 	return (cmd);
 }
 
+/**
+ * Custom implementation to get the value of an environment variable.
+ * Returns the value of the specified environment variable.
+ */
 char	*my_getenv(char *name, char **env)
 {
 	int		i;
@@ -83,6 +103,9 @@ char	*my_getenv(char *name, char **env)
 	return (NULL);
 }
 
+/**
+ * Frees a dynamically allocated array of strings (char**).
+ */
 void	ft_free_tab(char **tab)
 {
 	size_t	i;
