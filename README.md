@@ -4,8 +4,8 @@
 The Pipex project is an implementation of a simple yet powerful concept used in shell programming: the pipe. This program simulates the behavior of a pipe (`|`) and redirection (`>`) operators in a Unix shell. It takes commands as arguments and executes them in a pipeline fashion, where the output of one command serves as the input to the next.
 
 ### Features
-- **Standard Mode**: Execute a series of commands, piping the output of one into the input of another.
-- **Here-Doc Mode**: A feature similar to the Unix here-document, allowing input to be entered directly from the command line until a specified delimiter is encountered.
+- **Standard Mode**: Execute a series of two commands, piping the output of one into the input of another.
+- **Here-Doc Mode**: A feature similar to the Unix here-document (Here-Doc), allowing input to be entered directly from the command line until a specified delimiter is encountered. And also can do multiple pipe.
 
 ## Getting Started
 
@@ -24,7 +24,11 @@ The Pipex project is an implementation of a simple yet powerful concept used in 
    ```
 3. Compile the project:
    ```
-   make all
+   make
+   ```
+   Or the bonus part:
+   ```
+   make bonus
    ```
 
 ## Usage
@@ -32,7 +36,7 @@ The Pipex project is an implementation of a simple yet powerful concept used in 
 ### Standard Mode
 Execute the program with the input file, a list of commands, and the output file:
 ```
-./pipex infile "cmd1" "cmd2" ... "cmdN" outfile
+./pipex infile "cmd1" "cmd2" outfile
 ```
 Example:
 ```
