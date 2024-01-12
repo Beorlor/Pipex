@@ -6,7 +6,7 @@
 /*   By: beorlor <beorlor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:30:12 by beorlor           #+#    #+#             */
-/*   Updated: 2024/01/11 19:29:20 by beorlor          ###   ########.fr       */
+/*   Updated: 2024/01/12 14:49:48 by beorlor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	open_file(char *file, int in_or_out)
 	int	ret;
 
 	if (in_or_out == 0)
-		ret = open(file, O_RDONLY, 0777);
+		ret = open(file, O_RDONLY);
 	if (in_or_out == 1)
 		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (ret == -1)
