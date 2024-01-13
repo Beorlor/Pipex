@@ -6,7 +6,7 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:05:17 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/12 17:12:05 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/01/13 19:15:51 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,9 @@ void	here_doc(char **av)
  * Part of the 'here_doc' functionality.
  * This function is executed by the child process
  * to read input and write to a pipe.
+ * ft_strncmp_gnl compare two string taking in account the \\n added per gnl
+ * exemple END\n\0 = END\O
+ * so heredoc is stopped only if the line if exactly the limiter
  */
 void	here_doc_put_in(char **av, int *p_fd)
 {
@@ -144,7 +147,7 @@ void	here_doc_put_in(char **av, int *p_fd)
 	while (1)
 	{
 		ret = get_next_line(0);
-		if (ft_strncmp(ret, av[2], ft_strlen(av[2])) == 0)
+		if (ft_strncmp_gnl(ret, av[2], ft_strlen(av[2])) == 0)
 		{
 			free(ret);
 			exit(EXIT_SUCCESS);
