@@ -6,7 +6,7 @@
 /*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:05:06 by jedurand          #+#    #+#             */
-/*   Updated: 2024/01/13 18:26:02 by jedurand         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:05:31 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ void	exit_handler(int n_exit)
  */
 int	open_file(char *file, int in_or_out)
 {
-	int	ret;
+	int	fd;
 
 	if (in_or_out == 0)
-		ret = open(file, O_RDONLY);
+		fd = open(file, O_RDONLY);
 	else if (in_or_out == 1)
-		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else if (in_or_out == 2)
-		ret = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (ret == -1)
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	if (fd == -1)
 	{
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
-	return (ret);
+	return (fd);
 }
 
 /**
